@@ -1,0 +1,19 @@
+version: "3"
+
+services: 
+    db:
+        image: mongo
+        container_name: mongodb
+
+    app:
+        build:
+            context: .
+            dockerfile: ./docker/Dockerfile
+        command: npm run start
+        container_name: node-app
+        ports: 
+            - "3000:3000"
+        volumes: 
+            - ".:/app"
+        links: 
+            - db
